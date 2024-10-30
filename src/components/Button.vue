@@ -1,5 +1,6 @@
 <template>
-  <a :href="link" class="button">{{ text }}</a>
+  <!-- <a :href="link" class="button">{{ text }}</a> -->
+<button :style="{background: bgcolor}"></button>  
 </template>
 
 <script>
@@ -7,7 +8,16 @@ export default {
   props: {
     text: String,
     link: String,
+    bgcolor:{
+      type: String,
+    },
+ 
   },
+  // methods:{
+  //   shopNow(promotion){
+  //     alert("Let's shop: " +promotion.title);
+  //   }
+  // }
 };
 </script>
 

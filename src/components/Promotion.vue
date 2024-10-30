@@ -2,7 +2,9 @@
   <div class="promotion" :style="{ backgroundColor: bgcolor }">
     <div>
       <h2>{{ title }}</h2>
-      <Button :text="'Shop Now'" :link="link" />
+      <!-- <Button :text="'Shop Now'" :link="link" /> -->
+      <button class="shop-now-button" @click="shopNow()" :style="{backgroundColor :buttoncolor}">Shop Now--></button> 
+
     </div>
     <img :src="image" alt="promotion image" class="promotion-image" />
 
@@ -18,11 +20,21 @@ export default {
     image: String,
     link: String,
     bgcolor: String,
+    buttoncolor:{
+      type: String,
+    },
   },
   components: {
     Button,
   },
+  methods:{
+  shopNow(){
+    alert("Let's shop: " +this.title);
+    window.location.href = this.link;
+    },
+  },
 };
+
 </script>
 
 <style scoped>
@@ -43,6 +55,17 @@ export default {
   object-fit: contain;
   margin-top: 50px; 
   margin-right: -20px;
+}
+
+.shop-now-button {
+  background-color: green; /* Coral background color */
+  color: #fff; /* White text color */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 h2 {
