@@ -1,5 +1,5 @@
 <template>
-  <div class="category" :style="{ backgroundColor: bgcolor }">
+  <div class="category" :style="{ backgroundColor: color }">
     <img :src="image" alt="category image" class="category-image" />
     <p class="category-name">{{ name }}</p>
     <p class="category-count">{{ itemCount }} items</p>
@@ -12,7 +12,7 @@ export default {
     name: String,
     itemCount: Number,
     image: String,
-    bgcolor: String,
+    color: String,
   },
 };
 </script>

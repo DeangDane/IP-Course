@@ -1,9 +1,9 @@
 <template>
-  <div class="promotion" :style="{ backgroundColor: bgcolor }">
+  <div class="promotion" :style="{ backgroundColor: color }">
     <div>
       <h2>{{ title }}</h2>
       <!-- <Button :text="'Shop Now'" :link="link" /> -->
-      <button class="shop-now-button" @click="shopNow()" :style="{backgroundColor :buttoncolor}">Shop Now--></button> 
+      <button class="shop-now-button" @click="shopNow()" :style="{backgroundColor :buttonColor}">Shop Now--></button> 
 
     </div>
     <img :src="image" alt="promotion image" class="promotion-image" />
@@ -19,8 +19,8 @@ export default {
     title: String,
     image: String,
     link: String,
-    bgcolor: String,
-    buttoncolor:{
+    color: String,
+    buttonColor:{
       type: String,
     },
   },
