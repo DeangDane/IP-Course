@@ -21,62 +21,76 @@
         :buttonColor="promo.buttonColor"
       />
     </div>
+    <div class="product-row">
+      <Product
+        v-for="product in productsByGroup"
+        :key="product.id"
+        :name="product.name"
+        :rating="product.rating"
+        :size="product.size"
+        :image="product.image"
+        :price="product.price"
+        :promotionAsPercentage="product.promotionAsPercentage"
+        :categoryId="product.categoryId"
+        :instock="product.instock"
+        :countSold="product.countSold"
+        :group="product.group"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import Category from "./components/Category.vue";
 import Promotion from "./components/Promotion.vue";
-
-import axios from 'axios';
+import Product from "./components/Product.vue";
+import { useProductStore } from './stores/productStore';
+import { onMounted } from 'vue';
+import { mapState } from 'pinia';
 
 export default {
   components: {
     Category,
     Promotion,
+    Product,
   },
-  data() {
+  setup() {
+    const productStore = useProductStore();
+
+    // Load all data on component mount
+    onMounted(() => {
+      productStore.loadAllData();
+    });
+    
+    // Define any reactive properties needed for getters
+    const currentGroupName = 'fruits'; // example
+    const selectedCategoryId = 1; // example category ID
+
     return {
-      categories: [
-       
-      ],
-      promotions: [
-        // { title: "Everyday Fresh & Clean with Our Products", 
-        //   image: "src/assets/Cms-1.png", 
-        //   bgcolor: "#FFF5D9",
-        //   buttoncolor: "#34a853",
-        //   link: "#" },
-        // { title: "Make your Breakfast Healthy and Easy", 
-        //   image: "src/assets/Cms-2.png", 
-        //   bgcolor: "#FFE6E6",
-        //   buttoncolor: "#34a853", 
-        //   link: "#" },
-        // { title: "The best Organic Products Online", 
-        //   image: "src/assets/Cms-3.png", 
-        //   bgcolor: "#F0F8FF", 
-        //   buttoncolor: "#f5cb0f",
-        //   link: "#" },
-      ],
+      currentGroupName,
+      selectedCategoryId,
+      productStore
     };
   },
-  mounted(){
-    //fetch data categories, promotions from backend
-    this.fetchCategories()
-    this.fetchPromotions()
+
+  computed: {
+  ...mapState(useProductStore, {
+    popularProducts: 'getPopularProducts' 
+  }),
+
+  categories() {
+    return this.productStore.getCategoriesByGroup(this.currentGroupName);
   },
-  methods: {
-    fetchCategories() {
-      axios.get("http://localhost:3000/api/categories").then((result) => {
-        this.categories = result.data
-      })
-    },
-    fetchPromotions() {
-      axios.get("http://localhost:3000/api/promotions").then((result) => {
-        this.promotions = result.data
-      })
+  promotions() {
+    return this.productStore.getCategoriesByGroup(this.currentGroupName);
   },
+  productsByGroup() {
+    return this.productStore.getProductsByGroup(this.currentGroupName);
+  },
+  productsByCategory() {
+    return this.productStore.getProductsByCategory(this.selectedCategoryId);
+  }
 }
-  
 };
 </script>
 
@@ -99,5 +113,12 @@ export default {
 .promotion-list {
   display: flex;
   gap: 18px;
+}
+
+.product-row {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin-bottom: 10px;
 }
 </style>
