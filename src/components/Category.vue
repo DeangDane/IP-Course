@@ -24,7 +24,7 @@ export default {
   text-align: center;
   flex-direction: column;
   align-items: center;
-  width: 112px;
+  width: 100%;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 

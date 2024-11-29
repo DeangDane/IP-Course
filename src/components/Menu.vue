@@ -63,11 +63,11 @@
   }
   
   .menu-container a:hover {
-    color: green;
+    color: rgb(9, 22, 210);
   }
   
   .menu-container .active a {
-    color: yellow;
+    color: red;
     font-weight: bold;
   }
   </style>  

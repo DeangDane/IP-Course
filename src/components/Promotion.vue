@@ -46,7 +46,7 @@ export default {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   color: #333;
   height: 220px;
-  width: 420px;
+  width: 465px;
 }
 
 .promotion-image {

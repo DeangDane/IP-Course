@@ -23,7 +23,10 @@
       <Promotion
         v-for="(promotion, index) in promotions"
         :key="index"
-        v-bind="promotion"
+        :title="promotion.title"  
+        :image="promotion.image"
+        :color="promotion.color"
+        :buttonColor="promotion.buttonColor"
       />
     </div>
 
@@ -38,20 +41,26 @@
 
     <!-- Product Display -->
     <div class="product-row">
-      <Product
+      <!-- <Product
         v-for="(product, index) in filteredProducts"
         :key="index"
         v-bind="product"
-      />
+      /> -->
+      
+      <Product
+      v-for="(product, index) in filteredProducts"
+      :key="index"
+      :name="product.name"
+      :rating="product.rating"
+      :size="product.size"
+      :image="product.image"
+      :price="product.price"
+      :promotionAsPercentage="product.promotionAsPercentage"
+      :label="product.label"
+    />
     </div>
   </div>
 </template>
-
----
-
-### **Script**
-
-```vue
 <script>
 import Category from "./components/Category.vue";
 import Promotion from "./components/Promotion.vue";
@@ -105,6 +114,9 @@ export default {
       );
     });
 
+    // Ensure promotions are loaded and accessible
+    const promotions = computed(() => productStore.promotions);
+
     // Fetch all data on mount
     onMounted(() => {
       productStore.loadAllData();
@@ -118,7 +130,7 @@ export default {
       filteredProducts,
       selectedCategoryGroup,
       selectedProductGroup,
-      promotions: productStore.promotions, // Directly access promotions
+      promotions,  // Make sure promotions are passed to the template
     };
   },
 };
@@ -128,7 +140,6 @@ export default {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 30px;
 }
 
@@ -142,34 +153,18 @@ export default {
   gap: 20px; /* Adjusted for better spacing */
 }
 
-.category-row,
-.promo-row {
-  display: flex;
-  /* flex-wrap: wrap; */
-  gap: 15px;
-  /* justify-content: center; */
-  margin-bottom: 20px;
-}
-
 .category-list,
 .promotion-list {
   display: flex;
   gap: 15px;
-  flex-wrap: wrap;
-  justify-content: center; /* Center content for better alignment */
   width: 100%;
 }
 
 .product-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid layout */
-  gap: 15px;
+  grid-template-columns: auto auto auto auto auto; /* Responsive grid layout */
+  gap: 5px;
   width: 100%;
-}
-
-.menuCategorybar div,
-.menuProductbar div {
-  font-weight: bold;
 }
 
 button {
@@ -182,7 +177,7 @@ button {
 }
 
 button:hover {
-  color: green;
+  color: red;
   background-color: #f9f9f9;
   border-radius: 5px;
 }
@@ -201,4 +196,5 @@ button.active {
 .menuProductbar {
   gap: 50px; /* Adjusted for better spacing */
 }
+
 </style>
