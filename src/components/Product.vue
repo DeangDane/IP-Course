@@ -64,7 +64,7 @@ export default {
 }
 
 .product-image {
-  width: 90%;
+  width: 68%;
   height: 60%;
   margin-bottom: 10px;
 }
