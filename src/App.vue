@@ -1,48 +1,18 @@
 <template>
-  <div>
-    <!-- Include Header -->
-    <Header />
-
-    <div class="container">
-      <aside>
-        <router-view name="menu"></router-view>
-      </aside>
-      <main>
-        <router-view></router-view>
-      </main>
-    </div>
-
-    <!-- Include Footer -->
-    <Footer />
+  <div id="app">
+    <router-view />
   </div>
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
-import Footer from "@/components/Footer.vue";
-
 export default {
   name: "App",
-  components: {
-    Header,
-    Footer,
-  },
 };
 </script>
 
 <style>
-.container {
-  display: flex;
-}
-
-aside {
-  width: 20%;
-  background: #e9ecef;
-  padding: 10px;
-}
-
-main {
-  width: 80%;
-  padding: 10px;
-}
+ body{
+  margin: 0;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ }
 </style>

@@ -1,47 +1,47 @@
-import { createRouter, createWebHistory } from 'vue-router';
-
-import Page1 from '../components/Page1.vue';
-import Page2 from '../components/Page2.vue';
-import Page3 from '../components/Page3.vue';
-import Menu from '../components/MenuComponent.vue';
-import Section1 from '../components/Section1.vue';
-import Section2 from '../components/Section2.vue';
+import { createRouter, createWebHistory } from "vue-router";
+import Layout from "@/views/Layout.vue";
+import Page1 from "@/components/Page1.vue";
+import Page2 from "@/components/Page2.vue";
+import Page3 from "@/components/Page3.vue";
+import Section from "@/components/Section.vue";
 
 const routes = [
   {
-    path: '/page1',
-    components: {
-      default: Page1,
-      menu: Menu,
-    },
+    path: "/",
+    component: Layout,
     children: [
-      { path: 'section1', component: Section1 },
-      { path: 'section2', component: Section2 },
+      {
+        path: "page1",
+        component: Page1,
+        children: [
+          { path: "section1", component: Section, props: { sectionTitle: "Section 1 of Page 1" } },
+          { path: "section2", component: Section, props: { sectionTitle: "Section 2 of Page 1" } },
+          { path: "section3", component: Section, props: { sectionTitle: "Section 3 of Page 1" } },
+          { path: "section4", component: Section, props: { sectionTitle: "Section 4 of Page 1" } },
+        ],
+      },
+      {
+        path: "page2",
+        component: Page2,
+        children: [
+          { path: "section1", component: Section, props: { sectionTitle: "Section 1 of Page 2" } },
+          { path: "section2", component: Section, props: { sectionTitle: "Section 2 of Page 2" } },
+          { path: "section3", component: Section, props: { sectionTitle: "Section 3 of Page 2" } },
+          { path: "section4", component: Section, props: { sectionTitle: "Section 4 of Page 2" } },
+        ],
+      },
+      {
+        path: "page3",
+        component: Page3,
+        children: [
+          { path: "section1", component: Section, props: { sectionTitle: "Section 1 of Page 3" } },
+          { path: "section2", component: Section, props: { sectionTitle: "Section 2 of Page 3" } },
+          { path: "section3", component: Section, props: { sectionTitle: "Section 3 of Page 3" } },
+          { path: "section4", component: Section, props: { sectionTitle: "Section 4 of Page 3" } },
+        ],
+      },
     ],
   },
-  {
-    path: '/page2',
-    components: {
-      default: Page2,
-      menu: Menu,
-    },
-    children: [
-      { path: 'section1', component: Section1 },
-      { path: 'section2', component: Section2 },
-    ],
-  },
-  {
-    path: '/page3',
-    components: {
-      default: Page3,
-      menu: Menu,
-    },
-    children: [
-      { path: 'section1', component: Section1 },
-      { path: 'section2', component: Section2 },
-    ],
-  },
-
 ];
 
 const router = createRouter({
