@@ -13,6 +13,6 @@ export default {
 <style>
  body{
   margin: 0;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
- }
+  font-family: 'Times New Roman', Times, serif;
+}
 </style>
