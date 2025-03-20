@@ -25,6 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('cart', function (Blueprint $table) {
+            //This method modifies the cart table to reverse the migration.
             $table->dropSoftDeletes();
         });
     }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('order_product', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('product_id');
             $table->integer('quantity');
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->softDeletes();
 
              // Add foreign key constraints manually
+            $table->foreign('order_id')->references('id')->on('order')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('customer')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade'); 
         });

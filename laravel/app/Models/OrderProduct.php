@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderProduct extends Model
 {
-    protected $fillable = ['order_id', 'product_id', 'quantity'];
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
+    
+    protected $fillable = ['order_id', 'customer_id', 'product_id', 'quantity', 'price'];
+    protected $table = 'order_product';
 
     public function order()
     {

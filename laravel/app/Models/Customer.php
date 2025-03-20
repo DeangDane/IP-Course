@@ -15,6 +15,8 @@ class Customer extends Model {
 
     public function cart() {
         return $this->hasMany(Cart::class);
+        //This defines a one-to-many relationship between Customer and Cart.
+        //A customer can have many carts, and each cart belongs to a single customer.
     }
 
     public function wishlist() {

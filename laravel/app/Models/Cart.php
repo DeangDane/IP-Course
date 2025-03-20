@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Cart extends Model {
     use SoftDeletes;
 
-    protected $fillable = ['customer_id', 'product_id', 'quantity'];
+    protected $fillable = ['customer_id', 'product_id', 'quantity']; //This is important for security, ensuring only specific fields can be filled via user input.
     protected $table = 'cart';
 
     public function customer() {
