@@ -17,7 +17,7 @@ class CategoryTest extends TestCase
     }
 
     #[\PHPUnit\Framework\Attributes\Test]
-    public function test_can_create_category()
+    public function test_can_create_category() //post
     {
         $response = $this->postJson('/api/categories', [
             'name' => 'Test Category'
@@ -30,9 +30,10 @@ class CategoryTest extends TestCase
     }
 
     #[\PHPUnit\Framework\Attributes\Test]
-    public function test_can_get_single_category()
+    public function test_can_get_single_category() //create
     {
         $category = Category::create(['name' => 'Single Category']);
+        // Creates a category directly in the database.
 
         $response = $this->get("/api/categories/{$category->id}");
 
@@ -41,17 +42,19 @@ class CategoryTest extends TestCase
     }
 
     #[\PHPUnit\Framework\Attributes\Test]
-    public function test_can_update_category()
+    public function test_can_update_category() //patch
     {
         $category = Category::create(['name' => 'Old Name']);
 
         $response = $this->patchJson("/api/categories/{$category->id}", [
             'name' => 'Updated Name'
         ]);
+        // Sends a PATCH request to update the category's name.
 
         $response->assertStatus(200)
             ->assertJsonFragment(['name' => 'Updated Name']);
-
+        // Asserts that the response contains the updated name.
+        
         $this->assertDatabaseHas('categories', ['id' => $category->id, 'name' => 'Updated Name']);
     }
 
@@ -68,28 +71,3 @@ class CategoryTest extends TestCase
         $this->assertDatabaseMissing('categories', ['id' => $category->id]);
     }
 }
-
-
-// use Illuminate\Foundation\Testing\RefreshDatabase;
-// use Tests\TestCase;
-
-// class CategoryTest extends TestCase
-// {
-//     use RefreshDatabase;
-
-//     public function test_if_we_can_access_get_all_categories_api()
-//     {
-//         $this->artisan('db:seed', ['--class' => 'CategorySeeder']);
-
-//         $response = $this->get('/api/categories');
-
-//     $response->assertStatus(200)
-//         ->assertJsonStructure([
-//             'data' => [
-//                 '*' => ['id', 'name', 'created_at', 'updated_at']
-//             ]
-//         ]);
-
-//         $response->assertStatus(200)->assertJsonFragment(["message"=>"success"]);
-//     }
-// }

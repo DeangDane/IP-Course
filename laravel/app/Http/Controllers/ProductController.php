@@ -8,13 +8,15 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-   /**
-     * Display a listing of the resource.
-     */
+
     public function getProducts()
     {
         $products = Product::with('category')->get();
+        if ($products->isEmpty()) {
+            return response()->json(["message" => "No products found"]);
+        }
         return response()->json($products);
+
     }
 
     /**

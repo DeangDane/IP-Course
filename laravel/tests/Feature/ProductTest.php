@@ -28,7 +28,7 @@ class ProductTest extends TestCase
             'category_id' => $category->id,
             'pricing'     => 19.99,
             'description' => 'A sample product',
-            'images'      => json_encode(['product.jpg'])
+            'images'      => json_encode(['product.jpg']) //Accepts string
         ]);
 
         $response->assertStatus(201)
@@ -98,23 +98,3 @@ class ProductTest extends TestCase
         $this->assertDatabaseMissing('products', ['id' => $product->id]);
     }
 }
-
-
-// namespace Tests\Feature;
-
-// use Illuminate\Foundation\Testing\RefreshDatabase;
-// use Illuminate\Foundation\Testing\WithFaker;
-// use Tests\TestCase;
-
-// class ProductTest extends TestCase
-// {
-//     public function test_if_we_can_access_get_all_products_api()
-//     {
-//         $response = $this->get('/api/products');
-
-//         $response->assertJsonStructure([
-//             '*' => ['id', 'name', 'category_id', 'pricing', 'description', 'images']
-//         ]);
-        
-//     }
-// }
