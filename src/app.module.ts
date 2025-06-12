@@ -1,20 +1,23 @@
+// src/app.module.ts
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { BookModule } from './modules/book/book.module';
+import { join } from 'path';
+import { HotelModule } from './modules/hotel/hotel.module';
+// Correct the import path if the folder is named 'booking'
+import { BookingModule } from './modules/booking/booking.module';
+import { PrismaService } from './prisma/prisma.service';
 
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       playground: true,
-      typePaths: ['./**/*.graphql'],
     }),
-    BookModule,
+    HotelModule,
+    BookingModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  providers: [PrismaService],
 })
 export class AppModule {}
